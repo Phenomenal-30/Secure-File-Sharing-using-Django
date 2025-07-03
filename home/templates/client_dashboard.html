@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block title %}Client Dashboard{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Welcome {{ request.user.username }}</h2>
+
+<h4>Available Files</h4>
+<ul class="list-group mb-3">
+    {% for file in files %}
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            <div>
+                {{ file.file.name }} <br>
+                <span class="badge bg-secondary">{{ file.download_count }} downloads</span>
+            </div>
+            <button data-file-id="{{ file.id }}" class="btn btn-sm btn-primary download-btn">Download</button>
+        </li>
+    {% empty %}
+        <li class="list-group-item">No files available.</li>
+    {% endfor %}
+</ul>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const downloadButtons = document.querySelectorAll('.download-btn');
+
+        downloadButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const fileId = this.dataset.fileId;
+                getDownloadLink(fileId);
+            });
+        });
+
+        function getDownloadLink(fileId) {
+            fetch(`/api/get-uuid-download-link/${fileId}/`, {
+                method: 'GET',
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                },
+                credentials: 'include'
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.url) {
+                    window.location.href = data.url;
+                } else {
+                    alert("Failed to get secure link.");
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                alert("Something went wrong: " + error.message);
+            });
+        }
+    });
+</script>
+
+<a href="/logout/" class="btn btn-outline-danger mt-3">Logout</a>
+{% endblock %}

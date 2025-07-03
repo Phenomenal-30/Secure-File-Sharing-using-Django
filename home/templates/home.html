@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+    <div class="card bg-dark bg-opacity-75 text-white p-4" style="max-width: 500px; width: 100%;">
+        <div class="card-body text-center">
+            <h1 class="card-title display-6 fw-bold mb-3">Welcome to Secure File Sharing</h1>
+            <p class="card-text mb-4">A secure platform for uploading and downloading sensitive documents with role-based access.</p>
+
+            <div class="d-grid gap-3">
+                <a href="/ops-register/" class="btn btn-outline-light btn-lg">
+                    <i class="bi bi-person-plus-fill"></i> Register as OPS
+                </a>
+                <a href="/client-register/" class="btn btn-outline-light btn-lg">
+                    <i class="bi bi-person-plus"></i> Register as Client
+                </a>
+                <a href="/ops-login/" class="btn btn-outline-success btn-lg">
+                    <i class="bi bi-box-arrow-in-right"></i> Login as OPS
+                </a>
+                <a href="/client-login/" class="btn btn-outline-success btn-lg">
+                    <i class="bi bi-box-arrow-in-right"></i> Login as Client
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

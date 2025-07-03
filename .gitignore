@@ -1,0 +1,20 @@
+# Ignore Python bytecode
+__pycache__/
+*.py[cod]
+
+# Ignore environment variables
+.env
+
+# Ignore SQLite DB (optional)
+db.sqlite3
+
+# Ignore media/uploads (optional)
+media/uploads/
+
+# Ignore Django migrations (optional)
+**/migrations/*.py
+**/migrations/__pycache__/
+
+# VS Code and IDE config files
+.vscode/
+.idea/

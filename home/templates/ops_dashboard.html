@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}OPS Dashboard{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card p-4 shadow-sm">
+        <h2 class="mb-4 text-center">Welcome, {{ request.user.username }}</h2>
+        <p class="lead text-center">This is the OPS dashboard. You can upload files from here.</p>
+
+        <div class="d-flex justify-content-center gap-3 mt-4">
+            <a href="/upload-form/" class="btn btn-success">Upload File</a>
+            <a href="/logout/" class="btn btn-outline-danger">Logout</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
